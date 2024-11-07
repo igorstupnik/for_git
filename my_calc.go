@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func add(a, b float64) float64 {
+func add(a, b float64) float64 { //this function for summ
 	return a + b
 }
 
