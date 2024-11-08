@@ -24,7 +24,7 @@ func divide(a, b float64) float64 {
 	return a / b
 }
 
-func getInput() (float64, float64, string) {
+func getInput() (float64, float64, string) { // this function for input
 	var a, b float64
 	var operator string
 
