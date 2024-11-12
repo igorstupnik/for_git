@@ -19,31 +19,31 @@ func multiply(a, b float64) float64 {
 
 func divide(a, b float64) (float64, error) {
 	if b == 0 {
-		return 0, errors.New("деление на ноль")
+		return 0, errors.New("division by zero")
 	}
-	return a / b, nil //возвращаем результат деления и nil для ошибки
+	return a / b, nil
 }
 
 func getInput() (float64, float64, string, error) {
 	var a, b float64
 	var operator string
 
-	fmt.Print("Введите первое число: ")
+	fmt.Print("Enter the first number: ")
 	_, err := fmt.Scanln(&a)
 	if err != nil {
-		return 0, 0, "", errors.New("введено не число")
+		return 0, 0, "", errors.New("input is not a number")
 	}
 
-	fmt.Print("Введите второе число: ")
+	fmt.Print("Enter the second number: ")
 	_, err = fmt.Scanln(&b)
 	if err != nil {
-		return 0, 0, "", errors.New("введено не число")
+		return 0, 0, "", errors.New("input is not a number")
 	}
 
-	fmt.Print("Введите оператор (+, -, *, /): ")
+	fmt.Print("Enter an operator (+, -, *, /): ")
 	fmt.Scanln(&operator)
 	if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
-		return 0, 0, "", errors.New("неизвестный оператор")
+		return 0, 0, "", fmt.Errorf("unknown operator %s", operator)
 	}
 
 	return a, b, operator, nil
@@ -52,7 +52,7 @@ func getInput() (float64, float64, string, error) {
 func main() {
 	a, b, operator, err := getInput()
 	if err != nil {
-		fmt.Println("Ошибка: ", err)
+		fmt.Println("Error: ", err)
 		return
 	}
 
@@ -68,12 +68,12 @@ func main() {
 	case "/":
 		result, err = divide(a, b)
 		if err != nil {
-			fmt.Println("Ошибка:", err)
+			fmt.Println("Error:", err)
 			return
 		}
 	default:
 		return
 	}
 
-	fmt.Printf("Результат: %.2f\n", result)
+	fmt.Printf("Result: %.2f\n", result)
 }
