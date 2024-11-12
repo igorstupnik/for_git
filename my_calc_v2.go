@@ -24,7 +24,7 @@ func divide(a, b float64) (float64, error) {
 	return a / b, nil //возвращаем результат деления и nil для ошибки
 }
 
-func getInput() (float64, float64, string) {
+func getInput() (float64, float64, string, error) {
 	var a, b float64
 	var operator string
 
@@ -32,31 +32,34 @@ func getInput() (float64, float64, string) {
 	_, err := fmt.Scanln(&a)
 	if err != nil {
 		fmt.Println("Ошибка: введено не число.")
-		return 0, 0, ""
+		return 0, 0, "", errors.New("введено не число")
 	}
 
 	fmt.Print("Введите второе число: ")
 	_, err = fmt.Scanln(&b)
 	if err != nil {
 		fmt.Println("Ошибка: введено не число.")
-		return 0, 0, ""
+		return 0, 0, "", errors.New("введено не число")
 	}
 
 	fmt.Print("Введите оператор (+, -, *, /): ")
 	fmt.Scanln(&operator)
 	if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
-		fmt.Println("Ошибка: неизвестный оператор ", operator)
-		return 0, 0, ""
+		return 0, 0, "", errors.New("неизвестный оператор")
 	}
 
-	return a, b, operator
+	return a, b, operator, nil
 }
 
 func main() {
-	a, b, operator := getInput()
+	a, b, operator, err := getInput()
+	if err != nil {
+		fmt.Println("Ошибка: ", err)
+		return
+	}
 
 	var result float64
-	var err error
+	//var err error
 
 	switch operator {
 	case "+":
