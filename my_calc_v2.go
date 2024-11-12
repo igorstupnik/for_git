@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 )
 
 func add(a, b float64) float64 {
@@ -33,21 +32,21 @@ func getInput() (float64, float64, string) {
 	_, err := fmt.Scanln(&a)
 	if err != nil {
 		fmt.Println("Ошибка: введено не число.")
-		os.Exit(0)
+		return 0, 0, ""
 	}
 
 	fmt.Print("Введите второе число: ")
 	_, err = fmt.Scanln(&b)
 	if err != nil {
 		fmt.Println("Ошибка: введено не число.")
-		os.Exit(0)
+		return 0, 0, ""
 	}
 
 	fmt.Print("Введите оператор (+, -, *, /): ")
 	fmt.Scanln(&operator)
 	if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
 		fmt.Println("Ошибка: неизвестный оператор ", operator)
-		os.Exit(0)
+		return 0, 0, ""
 	}
 
 	return a, b, operator
