@@ -56,6 +56,7 @@ func main() {
 	a, b, operator := getInput()
 
 	var result float64
+	var err error
 
 	switch operator {
 	case "+":
@@ -65,8 +66,7 @@ func main() {
 	case "*":
 		result = multiply(a, b)
 	case "/":
-		result, _ = divide(a, b)
-		_, err := divide(a, b)
+		result, err = divide(a, b)
 		if err != nil {
 			fmt.Println("Ошибка:", err)
 			return
