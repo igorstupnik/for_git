@@ -37,8 +37,8 @@ func getInput() (float64, float64, string) {
 	}
 
 	fmt.Print("Введите второе число: ")
-	_, err1 := fmt.Scanln(&b)
-	if err1 != nil {
+	_, err = fmt.Scanln(&b)
+	if err != nil {
 		fmt.Println("Ошибка: введено не число.")
 		os.Exit(0)
 	}
