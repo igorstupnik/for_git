@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -16,12 +17,11 @@ func multiply(a, b float64) float64 {
 	return a * b
 }
 
-func divide(a, b float64) float64 {
+func divide(a, b float64) (float64, error) {
 	if b == 0 {
-		fmt.Println("Ошибка: деление на ноль!")
-		return 0
+		return 0, errors.New("деление на ноль")
 	}
-	return a / b
+	return a / b, nil //возвращаем результат деления и nil для ошибки
 }
 
 func getInput() (float64, float64, string) {
@@ -65,7 +65,12 @@ func main() {
 	case "*":
 		result = multiply(a, b)
 	case "/":
-		result = divide(a, b)
+		result, _ = divide(a, b)
+		_, err := divide(a, b)
+		if err != nil {
+			fmt.Println("Ошибка:", err)
+			return
+		}
 	default:
 		return
 	}
