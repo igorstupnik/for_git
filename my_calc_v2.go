@@ -67,7 +67,6 @@ func main() {
 	case "/":
 		result = divide(a, b)
 	default:
-		fmt.Println("Неизвестный оператор")
 		return
 	}
 
