@@ -18,6 +18,10 @@ func multiply(a, b float64) float64 {
 }
 
 func divide(a, b float64) float64 {
+	if b == 0 {
+		fmt.Println("Ошибка: деление на ноль!")
+		return 0
+	}
 	return a / b
 }
 
@@ -62,14 +66,9 @@ func main() {
 	case "*":
 		result = multiply(a, b)
 	case "/":
-		if b != 0 {
-			result = divide(a, b)
-		} else {
-			fmt.Println("Ошибка: деление на ноль!")
-			return
-		}
+		result = divide(a, b)
 	default:
-		//fmt.Println("Неизвестный оператор")
+		fmt.Println("Неизвестный оператор")
 		return
 	}
 
