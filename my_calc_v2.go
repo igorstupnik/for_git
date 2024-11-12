@@ -31,14 +31,12 @@ func getInput() (float64, float64, string, error) {
 	fmt.Print("Введите первое число: ")
 	_, err := fmt.Scanln(&a)
 	if err != nil {
-		fmt.Println("Ошибка: введено не число.")
 		return 0, 0, "", errors.New("введено не число")
 	}
 
 	fmt.Print("Введите второе число: ")
 	_, err = fmt.Scanln(&b)
 	if err != nil {
-		fmt.Println("Ошибка: введено не число.")
 		return 0, 0, "", errors.New("введено не число")
 	}
 
@@ -59,7 +57,6 @@ func main() {
 	}
 
 	var result float64
-	//var err error
 
 	switch operator {
 	case "+":
