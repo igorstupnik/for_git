@@ -2,19 +2,19 @@ package main
 
 import (
 	"for_git/business"
-	"for_git/presentation"
+	"for_git/console"
 )
 
 func main() {
-	a, b, operator, err := presentation.GetInput()
+	a, b, operator, err := console.GetInput()
 	if err != nil {
-		presentation.DisplayError(err)
+		console.DisplayError(err)
 		return
 	}
 	result, err := business.Calculate(a, b, operator)
 	if err != nil {
-		presentation.DisplayError(err)
+		console.DisplayError(err)
 		return
 	}
-	presentation.DispayResults(result)
+	console.DispayResults(result)
 }
