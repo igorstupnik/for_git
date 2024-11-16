@@ -23,7 +23,7 @@ func GetInput() (float64, float64, string, error) {
 
 	fmt.Print("Enter an operator (+, -, *, /): ")
 	fmt.Scanln(&operator)
-	if operator != "+" && operator != "-" && operator != "*" && operator != "/" {
+	if isNotOperator(operator) {
 		return 0, 0, "", fmt.Errorf("unknown operator %s", operator)
 	}
 
@@ -36,4 +36,8 @@ func DispayResults(result float64) {
 
 func DisplayError(err error) {
 	fmt.Println("Error:", err)
+}
+
+func isNotOperator(s string) bool {
+	return s != "+" && s != "-" && s != "*" && s != "/"
 }
