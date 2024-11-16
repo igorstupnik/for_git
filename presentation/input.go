@@ -1,5 +1,3 @@
-//presentation/input.go
-
 package presentation
 
 import (
