@@ -1,7 +1,7 @@
 package main
 
 import (
-	"for_git/business"
+	"for_git/calculations"
 	"for_git/console"
 )
 
@@ -11,7 +11,7 @@ func main() {
 		console.DisplayError(err)
 		return
 	}
-	result, err := business.Calculate(a, b, operator)
+	result, err := calculations.Calculate(a, b, operator)
 	if err != nil {
 		console.DisplayError(err)
 		return
