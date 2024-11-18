@@ -1,8 +1,8 @@
 package main
 
 import (
-	"for_git/calculations"
-	"for_git/console"
+	"for_git/mycalc/internal/service/console"
+	"for_git/mycalc/pkg/config/calculations"
 )
 
 func main() {
