@@ -1,7 +1,7 @@
 package main
 
 import (
-	"for_git/internal/service/console"
+	"for_git/internal/console"
 	"for_git/pkg/config/calculations"
 )
 
