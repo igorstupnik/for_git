@@ -2,7 +2,7 @@ package main
 
 import (
 	"for_git/internal/console"
-	"for_git/pkg/config/calculations"
+	"for_git/pkg/calculations"
 )
 
 func main() {
