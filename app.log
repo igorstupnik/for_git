@@ -1,0 +1,6 @@
+APP: 2024/11/22 14:25:32 logger.go:20: INFO: Calculator is running
+APP: 2024/11/22 14:25:40 logger.go:20: INFO: Calculation completed
+APP: 2024/11/22 14:25:48 logger.go:20: INFO: Calculator is running
+APP: 2024/11/22 14:25:51 logger.go:24: ERROR: Input error
+APP: 2024/11/22 14:25:58 logger.go:20: INFO: Calculator is running
+APP: 2024/11/22 14:26:07 logger.go:24: ERROR: Input error
