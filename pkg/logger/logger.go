@@ -5,21 +5,27 @@ import (
 	"os"
 )
 
-var Logger *log.Logger
+type Logger interface {
+	Info(msg string)
+	Error(msg string)
+}
 
-func init() {
+type StandardLogger struct {
+	infoLogger  *log.Logger
+	errorLogger *log.Logger
+}
 
-	file, err := os.OpenFile("app.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		log.Fatalf("Error by opening log file: %v", err)
+func NewStandardLogger() *StandardLogger {
+	return &StandardLogger{
+		infoLogger:  log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile),
+		errorLogger: log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile),
 	}
-	Logger = log.New(file, "APP: ", log.Ldate|log.Ltime|log.Lshortfile)
 }
 
-func Info(message string) {
-	Logger.Println("INFO: " + message)
+func (l *StandardLogger) Info(msg string) {
+	l.infoLogger.Println(msg)
 }
 
-func Error(message string) {
-	Logger.Println("ERROR: " + message)
+func (l *StandardLogger) Error(msg string) {
+	l.errorLogger.Println(msg)
 }
