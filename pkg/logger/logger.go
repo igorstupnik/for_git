@@ -1,31 +1,16 @@
 package logger
 
 import (
-	"log"
 	"os"
+
+	"github.com/sirupsen/logrus"
 )
 
-type Logger interface {
-	Info(msg string)
-	Error(msg string)
-}
+var Log *logrus.Logger
 
-type StandardLogger struct {
-	infoLogger  *log.Logger
-	errorLogger *log.Logger
-}
-
-func NewStandardLogger() *StandardLogger {
-	return &StandardLogger{
-		infoLogger:  log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile),
-		errorLogger: log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile),
-	}
-}
-
-func (l *StandardLogger) Info(msg string) {
-	l.infoLogger.Println(msg)
-}
-
-func (l *StandardLogger) Error(msg string) {
-	l.errorLogger.Println(msg)
+func Init() {
+	Log = logrus.New()
+	Log.SetFormatter(&logrus.JSONFormatter{}) // Формат JSON
+	Log.SetOutput(os.Stdout)                  // Вывод в стандартный поток
+	Log.SetLevel(logrus.InfoLevel)            // Уровень логирования
 }
