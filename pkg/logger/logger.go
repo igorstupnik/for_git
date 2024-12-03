@@ -6,11 +6,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var Log *logrus.Logger
-
-func Init() {
-	Log = logrus.New()
-	Log.SetFormatter(&logrus.JSONFormatter{}) // Формат JSON
-	Log.SetOutput(os.Stdout)                  // Вывод в стандартный поток
-	Log.SetLevel(logrus.InfoLevel)            // Уровень логирования
+func NewLogger() *logrus.Logger {
+	log := logrus.New()
+	log.SetFormatter(&logrus.JSONFormatter{}) // Формат JSON
+	log.SetOutput(os.Stdout)                  // Вывод в стандартный поток
+	log.SetLevel(logrus.InfoLevel)            // Уровень логирования
+	return log
 }

@@ -1,6 +1,10 @@
 package calculations
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/sirupsen/logrus"
+)
 
 func add(a, b float64) float64 {
 	return a + b
@@ -14,14 +18,22 @@ func multiply(a, b float64) float64 {
 	return a * b
 }
 
-func divide(a, b float64) (float64, error) {
+func divide(a, b float64, log *logrus.Logger) (float64, error) {
 	if b == 0 {
-		return 0, errors.New("division by zero")
+		err := errors.New("division by zero")
+		log.WithError(err).Error("Error: division by zero")
+		return 0, err
 	}
 	return a / b, nil
 }
 
-func Calculate(a, b float64, operator string) (float64, error) {
+func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, error) {
+
+	log.WithFields(logrus.Fields{
+		"a":        a,
+		"b":        b,
+		"operator": operator,
+	}).Info("Calculation in prosess")
 
 	switch operator {
 	case "+":
@@ -31,9 +43,11 @@ func Calculate(a, b float64, operator string) (float64, error) {
 	case "*":
 		return multiply(a, b), nil
 	case "/":
-		return divide(a, b)
+		return divide(a, b, log)
 
 	default:
-		return 0, errors.New("invalid operator")
+		err := errors.New("invalid operator")
+		log.WithError(err).Error("Error: invalid operator")
+		return 0, err
 	}
 }

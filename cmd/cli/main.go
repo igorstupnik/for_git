@@ -9,12 +9,12 @@ import (
 )
 
 func main() {
-	logger.Init()
-	log := logger.Log
+
+	log := logger.NewLogger()
 
 	log.Info("Need data from user")
 
-	a, b, operator, err := console.GetInput()
+	a, b, operator, err := console.GetInput(log)
 	if err != nil {
 		log.WithError(err).Error("Error with data input")
 		return
@@ -26,12 +26,12 @@ func main() {
 		"operator": operator,
 	}).Info("Start to calculate")
 
-	result, err := calculations.Calculate(a, b, operator)
+	result, err := calculations.Calculate(a, b, operator, log)
 	if err != nil {
 		log.WithError(err).Error("Error with calculation")
 		return
 	}
 	log.WithField("result", result).Info("Calculation completed successfuly")
-	console.DispayResults(result)
+	console.DispayResults(result, log)
 
 }
