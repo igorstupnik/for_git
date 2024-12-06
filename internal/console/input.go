@@ -45,8 +45,8 @@ func DispayResults(result float64, log *logrus.Logger) {
 }
 
 func DisplayError(err error, log *logrus.Logger) {
-	log.WithField("Error", err).Info("The error has displayed successfully")
 	fmt.Println("Error:", err)
+	log.WithField("Error", err).Debug("The error has displayed successfully")
 }
 
 func isNotOperator(s string) bool {
