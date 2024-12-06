@@ -6,45 +6,61 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func add(a, b float64) float64 {
-	return a + b
+type Calculator struct {
+	Logger *logrus.Logger
 }
 
-func subtract(a, b float64) float64 {
-	return a - b
+func (c *Calculator) Add(a, b float64) float64 {
+	result := a + b
+	c.Logger.WithFields(logrus.Fields{"a": a, "b": b, "result": result}).Info("Performed addition")
+	return result
 }
 
-func multiply(a, b float64) float64 {
-	return a * b
+func (c *Calculator) Subtract(a, b float64) float64 {
+	result := a - b
+	c.Logger.WithFields(logrus.Fields{"a": a, "b": b, "result": result}).Info("Performed substraction")
+	return result
 }
 
-func divide(a, b float64, log *logrus.Logger) (float64, error) {
+func (c *Calculator) Multiply(a, b float64) float64 {
+	result := a * b
+	c.Logger.WithFields(logrus.Fields{"a": a, "b": b, "result": result}).Info("Performed multiplication")
+	return result
+}
+
+func (c *Calculator) Divide(a, b float64) (float64, error) {
 	if b == 0 {
 		err := errors.New("division by zero")
-		log.WithError(err).Error("division by zero")
+		c.Logger.WithFields(logrus.Fields{"a": a, "b": b}).WithError(err).Error("Error in division")
 		return 0, err
 	}
-	return a / b, nil
+	result := a / b
+	c.Logger.WithFields(logrus.Fields{"a": a, "b": b, "result": result}).Info("Performed division")
+	return result, nil
 }
 
-func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, error) {
-	log.WithFields(logrus.Fields{
+func (c *Calculator) Calculate(a, b float64, operator string) (float64, error) {
+	c.Logger.WithFields(logrus.Fields{
 		"a":        a,
 		"b":        b,
 		"operator": operator,
-	}).Info("Calculation in progress")
+	}).Info("Starting calculation")
 	switch operator {
 	case "+":
-		return add(a, b), nil
+		return c.Add(a, b), nil
 	case "-":
-		return subtract(a, b), nil
+		return c.Subtract(a, b), nil
 	case "*":
-		return multiply(a, b), nil
+		return c.Multiply(a, b), nil
 	case "/":
-		return divide(a, b, log)
+		return c.Divide(a, b)
 	default:
 		err := errors.New("invalid operator")
-		log.WithError(err).Error("invalid operator")
+		c.Logger.WithFields(logrus.Fields{
+			"a":        a,
+			"b":        b,
+			"operator": operator,
+		}).WithError(err).Error("Error in calculation")
 		return 0, err
 	}
 }

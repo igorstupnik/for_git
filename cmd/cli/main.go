@@ -4,34 +4,28 @@ import (
 	"for_git/internal/console"
 	"for_git/pkg/calculations"
 	"for_git/pkg/logger"
-
-	"github.com/sirupsen/logrus"
 )
 
 func main() {
 
-	log := logger.NewLogger()
+	logger := logger.NewLogger()
+	console := &console.Console{Logger: logger}
+	calculator := &calculations.Calculator{Logger: logger}
 
-	log.Info("Need data from user")
+	logger.Info("Starting calculator program")
 
-	a, b, operator, err := console.GetInput(log)
+	a, b, operator, err := console.GetInput()
 	if err != nil {
-		log.WithError(err).Error("Error with data input")
+		logger.WithError(err).Error("Input error")
+		console.DisplayError(err)
 		return
 	}
 
-	log.WithFields(logrus.Fields{
-		"a":        a,
-		"b":        b,
-		"operator": operator,
-	}).Info("Start to calculate")
-
-	result, err := calculations.Calculate(a, b, operator, log)
+	result, err := calculator.Calculate(a, b, operator)
 	if err != nil {
-		log.WithError(err).Error("Error with calculation")
+		console.DisplayError(err)
 		return
 	}
-	log.WithField("result", result).Info("Calculation completed successfuly")
-	console.DispayResults(result, log)
+	console.DispayResults(result)
 
 }
