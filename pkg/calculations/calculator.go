@@ -28,13 +28,11 @@ func divide(a, b float64, log *logrus.Logger) (float64, error) {
 }
 
 func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, error) {
-
 	log.WithFields(logrus.Fields{
 		"a":        a,
 		"b":        b,
 		"operator": operator,
 	}).Info("Calculation in prosess")
-
 	switch operator {
 	case "+":
 		return add(a, b), nil
@@ -44,7 +42,6 @@ func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, erro
 		return multiply(a, b), nil
 	case "/":
 		return divide(a, b, log)
-
 	default:
 		err := errors.New("invalid operator")
 		log.WithError(err).Error("Error: invalid operator")
