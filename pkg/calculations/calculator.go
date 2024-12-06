@@ -21,7 +21,7 @@ func multiply(a, b float64) float64 {
 func divide(a, b float64, log *logrus.Logger) (float64, error) {
 	if b == 0 {
 		err := errors.New("division by zero")
-		log.WithError(err).Error("Error: division by zero")
+		log.WithError(err).Error("division by zero")
 		return 0, err
 	}
 	return a / b, nil
@@ -32,7 +32,7 @@ func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, erro
 		"a":        a,
 		"b":        b,
 		"operator": operator,
-	}).Info("Calculation in prosess")
+	}).Info("Calculation in progress")
 	switch operator {
 	case "+":
 		return add(a, b), nil
@@ -44,7 +44,7 @@ func Calculate(a, b float64, operator string, log *logrus.Logger) (float64, erro
 		return divide(a, b, log)
 	default:
 		err := errors.New("invalid operator")
-		log.WithError(err).Error("Error: invalid operator")
+		log.WithError(err).Error("invalid operator")
 		return 0, err
 	}
 }
