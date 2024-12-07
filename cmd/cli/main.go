@@ -9,8 +9,8 @@ import (
 func main() {
 
 	logger := logger.NewLogger()
-	console := &console.Console{Logger: logger}
-	calculator := &calculations.Calculator{Logger: logger}
+	console := console.NewConsole(logger)
+	calculator := calculations.NewCalcualator(logger)
 
 	logger.Info("Starting calculator program")
 
