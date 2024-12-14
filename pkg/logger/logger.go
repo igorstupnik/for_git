@@ -6,7 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func NewLogger() *logrus.Logger {
+func New() *logrus.Logger {
 	log := logrus.New()
 	log.SetFormatter(&logrus.JSONFormatter{}) // Формат JSON
 	log.SetOutput(os.Stdout)                  // Вывод в стандартный поток

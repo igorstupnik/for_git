@@ -11,7 +11,7 @@ type Console struct {
 	logger *logrus.Logger
 }
 
-func NewConsole(logger *logrus.Logger) *Console {
+func New(logger *logrus.Logger) *Console {
 	return &Console{logger: logger}
 }
 

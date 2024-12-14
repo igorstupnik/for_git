@@ -8,8 +8,8 @@ import (
 
 func main() {
 
-	logger := logger.NewLogger()
-	console := console.NewConsole(logger)
+	logger := logger.New()
+	console := console.New(logger)
 	calculator := calculations.NewCalcualator(logger)
 
 	logger.Info("Starting calculator program")
